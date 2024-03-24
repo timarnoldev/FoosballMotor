@@ -1,0 +1,104 @@
+//
+// Created by Tim Arnold on 04.10.23.
+//
+#include <cstdio>
+#include "pico/stdlib.h"
+#include "pico/time.h"
+#include "hardware/irq.h"
+#include "hardware/pwm.h"
+
+void break_motor(bool clockwise) {
+
+    if(clockwise) {
+        pwm_set_chan_level(pwm_gpio_to_slice_num(17), !(17 % 2==0), 0);
+        pwm_set_chan_level(pwm_gpio_to_slice_num(16), !(16 % 2==0), 625);
+        sleep_ms(20);
+        pwm_set_chan_level(pwm_gpio_to_slice_num(16), !(16 % 2==0), 0);
+    }else{
+        pwm_set_chan_level(pwm_gpio_to_slice_num(16), !(16 % 2==0), 0);
+        pwm_set_chan_level(pwm_gpio_to_slice_num(17), !(17 % 2==0), 625);
+        sleep_ms(20);
+        pwm_set_chan_level(pwm_gpio_to_slice_num(17), !(17 % 2==0), 0);
+
+    }
+
+
+}
+
+//motor is connected to 17 and 16
+
+int main() {
+    stdio_init_all();
+
+    gpio_set_function(16, GPIO_FUNC_PWM);
+    gpio_set_function(17, GPIO_FUNC_PWM);
+
+    uint slice_num_16 = pwm_gpio_to_slice_num(16);
+    uint slice_num_17 = pwm_gpio_to_slice_num(17);
+
+    pwm_config config_16 = pwm_get_default_config();
+    pwm_config config_17 = pwm_get_default_config();
+
+    pwm_config_set_clkdiv(&config_16, 200.0f);
+    pwm_config_set_wrap(&config_16, 625);
+    pwm_init(slice_num_16, &config_16, true);
+
+
+    pwm_set_chan_level(slice_num_16, !(16 % 2==0), 50);
+    pwm_set_chan_level(slice_num_17, !(17 % 2==0), 0);
+
+    pwm_set_enabled(slice_num_16, true);
+
+    break_motor(true);
+    sleep_ms(300);
+    break_motor(false);
+    sleep_ms(300);
+    break_motor(true);
+    sleep_ms(300);
+    break_motor(false);
+    sleep_ms(300);
+    break_motor(true);
+    sleep_ms(300);
+    break_motor(false);
+    sleep_ms(300);
+    break_motor(true);
+    sleep_ms(300);
+    break_motor(false);
+
+    int i=0;
+    bool go_up = true;
+
+    while (true) {
+        printf("Hello, world!\n");
+
+
+
+
+        pwm_set_chan_level(slice_num_16, !(16 % 2==0), 30);
+        // sleep_ms(250);
+        // break_motor(false);
+
+        sleep_ms(100);
+        // pwm_set_chan_level(slice_num_16, !(17 % 2==0), 625);
+        sleep_ms(250);
+        // if(go_up) {
+        //     i++;
+        // }else{
+        //      i--;
+        //  }
+
+        // if(i==625){
+        //     go_up=false;
+        //  }else if(i==0){
+        //      go_up=true;
+        //   }
+
+        //  break_motor(true);
+        sleep_ms(100);
+
+
+
+
+    }
+    return 0;
+}

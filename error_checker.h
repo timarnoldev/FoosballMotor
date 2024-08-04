@@ -12,7 +12,7 @@ namespace error_checker {
 
     void check_for_fatal_errors() {
         if(fatal_error) return;
-        if(linear_movement::current_position < -1 || linear_movement::current_position > 247) {
+        if(linear_movement::current_position < (lower_bound-1) || linear_movement::current_position > (upper_bound+1)) {
             printf("------------------\n");
             printf("LINEAR MOVEMENT IS OUT OF BOUNDS\n");
             printf("------------------\n");

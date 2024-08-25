@@ -1,5 +1,9 @@
+#define USBD_PID 0x0001
+#define USBD_PRODUCT "Fussball"
+
 #include <cstdio>
 #include <pico/multicore.h>
+#include "tusb.h"
 #include "pico/stdlib.h"
 #include "pico/time.h"
 #include "communication.h"
@@ -9,9 +13,61 @@
 #include "rotation/rotation.h"
 #include "system/system.h"
 #include "secondCoreEntry.h"
+#include "tusb_config.h"
+
+
+// Invoked when device is mounted
+void tud_mount_cb(void)
+{
+    communication::connected = true;
+}
+
+// Invoked when device is unmounted
+void tud_umount_cb(void)
+{
+    communication::connected = false;
+}
+
+void tud_suspend_cb(bool remote_wakeup_en)
+{
+    (void) remote_wakeup_en;
+
+}
+
+// Invoked when usb bus is resumed
+void tud_resume_cb(void)
+{
+
+}
+
+uint16_t tud_hid_get_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen)
+{
+    // TODO not Implemented
+    (void) itf;
+    (void) report_id;
+    (void) report_type;
+    (void) buffer;
+    (void) reqlen;
+
+    return 0;
+}
+
+// Invoked when received SET_REPORT control request or
+// received data on OUT endpoint ( Report ID = 0, Type = 0 )
+void tud_hid_set_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize)
+{
+    // This example doesn't use multiple report and report ID
+    (void) itf;
+    (void) report_id;
+    (void) report_type;
+
+    // echo back anything we received from host
+    tud_hid_report(0, buffer, bufsize);
+}
 
 int main() {
-    stdio_init_all();
+    //stdio_init_all();
+    tud_init(BOARD_TUD_RHPORT);
 
     sleep_ms(1000);
 
@@ -48,7 +104,9 @@ int main() {
         rotation::setPulse(communication::current_rotation);
 
 
-        sleep_ms(1);
+        tud_task();
+
+        //FIXME here was a sleepms(1)
 
 
         if(absolute_time_diff_us(last_update, get_absolute_time())>4000) {

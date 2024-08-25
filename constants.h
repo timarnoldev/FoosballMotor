@@ -15,7 +15,7 @@
 // 2: mid fielder
 // 3: striker
 
-#define DEVICE_POSITION 0
+#define DEVICE_POSITION 0 //also change it in CMakeLists.txt
 
 //-------SELECTION END -------
 

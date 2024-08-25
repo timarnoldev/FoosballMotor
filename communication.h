@@ -11,6 +11,8 @@
 
 // $RRRR,MMMM#
 
+
+
 namespace communication {
     bool inDataline;
     int data_counter = 0;
@@ -19,9 +21,10 @@ namespace communication {
     std::string received_rotation;
     std::string received_position;
     int current_position = 0;
+    bool connected = false;
 
     bool is_connected() {
-        return absolute_time_diff_us(last_packet, get_absolute_time()) < 1000000;
+        return connected;
     }
 
     void readData() {
@@ -85,7 +88,13 @@ namespace communication {
 
 
     }
+
+
+
 }
+
+
+
 
 
 

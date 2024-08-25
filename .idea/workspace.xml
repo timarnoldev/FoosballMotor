@@ -18,7 +18,6 @@
       <config projectName="foosballmotortest" targetName="PioasmBuild" />
       <config projectName="foosballmotortest" targetName="bs2_default_padded_checksummed_asm" />
       <config projectName="foosballmotortest" targetName="bs2_default" />
-      <config projectName="foosballmotortest" targetName="cyw43_firmware_package" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -33,17 +32,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f180659-a98c-421e-983d-22bccd63e848" name="Changes" comment="improved code structure">
-      <change afterPath="$PROJECT_DIR$/secondCoreEntry.h" afterDir="false" />
+    <list default="true" id="9f180659-a98c-421e-983d-22bccd63e848" name="Changes" comment="Added constants for device position">
+      <change afterPath="$PROJECT_DIR$/tusb_config.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usb_descriptors.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/communication.h" beforeDir="false" afterPath="$PROJECT_DIR$/communication.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linear_movement/linear_movement.h" beforeDir="false" afterPath="$PROJECT_DIR$/linear_movement/linear_movement.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants.h" beforeDir="false" afterPath="$PROJECT_DIR$/constants.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pid_settings.h" beforeDir="false" afterPath="$PROJECT_DIR$/pid_settings.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rotation/rotation.h" beforeDir="false" afterPath="$PROJECT_DIR$/rotation/rotation.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/system.h" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.h" afterDir="false" />
-      <change beforePath="$USER_HOME$/development/pico/pico-sdk/lib/lwip" beforeDir="false" afterPath="$USER_HOME$/development/pico/pico-sdk/lib/lwip" afterDir="false" />
-      <change beforePath="$USER_HOME$/development/pico/pico-sdk/lib/tinyusb" beforeDir="false" afterPath="$USER_HOME$/development/pico/pico-sdk/lib/tinyusb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +54,20 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;timarnoldev&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:timarnoldev/FoosballMotor.git&quot;,
+    &quot;accountId&quot;: &quot;df2489dc-9ef7-4e4b-9ccf-34e488351ff4&quot;
+  }
+}</component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="smw83nky" />
   </component>
@@ -68,6 +79,9 @@
     <option name="majorVersion" value="2023" />
     <option name="minorVersion" value="1.2" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2QPwKXfnifuNgotNOGZxf7SPzeC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -77,16 +91,19 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;CMake Application.foosballmotortest.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/timarnold/Documents/GitHub/TestProjects/FoosballMotorTest&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/timarnold/Documents/GitHub/FoosballMotor&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -109,42 +126,42 @@
     <configuration name="myproject_test" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
     </configuration>
-    <configuration name="ELF2UF2Build" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="ELF2UF2Build" CONFIG_NAME="Debug">
+    <configuration name="ELF2UF2Build" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="ELF2UF2Build" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PioasmBuild" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="PioasmBuild" CONFIG_NAME="Debug">
+    <configuration name="PioasmBuild" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="PioasmBuild" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="bs2_default" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="bs2_default" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="foosballmotortest" RUN_TARGET_NAME="bs2_default">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="bs2_default_bin" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="bs2_default_bin" CONFIG_NAME="Debug">
+    <configuration name="bs2_default" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="bs2_default" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="foosballmotortest" RUN_TARGET_NAME="bs2_default">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="bs2_default_padded_checksummed_asm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="bs2_default_padded_checksummed_asm" CONFIG_NAME="Debug">
+    <configuration name="bs2_default_bin" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="bs2_default_bin" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="cyw43_driver_picow_cyw43_bus_pio_spi_pio_h" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="cyw43_driver_picow_cyw43_bus_pio_spi_pio_h" CONFIG_NAME="Debug">
+    <configuration name="bs2_default_padded_checksummed_asm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="bs2_default_padded_checksummed_asm" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="cyw43_firmware_package" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="cyw43_firmware_package" CONFIG_NAME="Debug">
+    <configuration name="cyw43_driver_picow_cyw43_bus_pio_spi_pio_h" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="cyw43_driver_picow_cyw43_bus_pio_spi_pio_h" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="foosballmotortest" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="foosballmotortest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="foosballmotortest" RUN_TARGET_NAME="foosballmotortest">
+    <configuration name="foosballmotortest" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="foosballmotortest" TARGET_NAME="foosballmotortest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="foosballmotortest" RUN_TARGET_NAME="foosballmotortest">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -156,7 +173,6 @@
       <item itemvalue="CMake Application.bs2_default_bin" />
       <item itemvalue="CMake Application.bs2_default_padded_checksummed_asm" />
       <item itemvalue="CMake Application.cyw43_driver_picow_cyw43_bus_pio_spi_pio_h" />
-      <item itemvalue="CMake Application.cyw43_firmware_package" />
       <item itemvalue="CMake Application.foosballmotortest" />
       <item itemvalue="CMake Debug.myproject_test" />
     </list>
@@ -192,6 +208,18 @@
       <workItem from="1704134483320" duration="4183000" />
       <workItem from="1704195057656" duration="5831000" />
       <workItem from="1707558926952" duration="3726000" />
+      <workItem from="1717420306258" duration="1779000" />
+      <workItem from="1717920186474" duration="12000" />
+      <workItem from="1717920256586" duration="599000" />
+      <workItem from="1718186322379" duration="599000" />
+      <workItem from="1719936692696" duration="4269000" />
+      <workItem from="1721681623446" duration="603000" />
+      <workItem from="1722013037941" duration="3390000" />
+      <workItem from="1722411943589" duration="2015000" />
+      <workItem from="1722758667408" duration="1538000" />
+      <workItem from="1722767393341" duration="2704000" />
+      <workItem from="1722860259155" duration="3640000" />
+      <workItem from="1722889560298" duration="8378000" />
     </task>
     <task id="LOCAL-00001" summary="Added encoder tracking">
       <created>1700342579501</created>
@@ -221,24 +249,58 @@
       <option name="project" value="LOCAL" />
       <updated>1702125026332</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added constants for device position">
+      <option name="closed" value="true" />
+      <created>1722759470836</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722759470836</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VCPKGProject">
-    <isAutomaticEditVcpkgJson value="false" />
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
-    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="user">
+                    <value>
+                      <list>
+                        <option value="*" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -250,7 +312,8 @@
     <MESSAGE value="Added pid controller" />
     <MESSAGE value="implemented speed control" />
     <MESSAGE value="improved code structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="improved code structure" />
+    <MESSAGE value="Added constants for device position" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added constants for device position" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -65,6 +65,32 @@ void tud_hid_set_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t rep
     tud_hid_report(0, buffer, bufsize);
 }
 
+void send_host_report()
+{
+
+    if(!tud_mounted()) return;
+
+    union data_holder
+    {
+        float f;
+        uint8_t b[4];
+    } data;
+
+    uint8_t * buffer = new uint8_t[7];
+    buffer[0] = 0x02; // HEADER | STATUS BYTE | POSITION 1 | POSITION 2 | POSITION 3 | POSITION 4 | END
+    buffer[1] = error_checker::fatal_error | (error_checker::out_of_bounds << 1) | (error_checker::encoder_error << 2) | (error_checker::encoder_timeout << 3) | (linear_movement::is_in_safe_zone_top << 4) | (linear_movement::is_in_safe_zone_bottom << 5);
+    data.f = linear_movement::current_position;
+    memcpy(buffer+2, data.b, 4); // POSITION 1 | POSITION 2 | POSITION 3 | POSITION 4
+    buffer[6] = 0x04;
+
+    tud_hid_report(0, buffer, 7);
+
+    delete [] buffer;
+
+}
+
+
+
 int main() {
     //stdio_init_all();
     tud_init(BOARD_TUD_RHPORT);
@@ -105,6 +131,11 @@ int main() {
 
 
         tud_task();
+
+        send_host_report();
+
+        sleep_ms(1);
+
 
         //FIXME here was a sleepms(1)
 

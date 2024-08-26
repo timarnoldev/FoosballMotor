@@ -21,7 +21,7 @@ namespace systemPCB {
 
     void updateLEDSignals() {
         gpio_put(LED_BLUE_PIN, linear_movement::is_in_safe_zone_top || linear_movement::is_in_safe_zone_bottom);
-        gpio_put(LED_YELLOW_PIN, !communication::is_connected());
+        gpio_put(LED_YELLOW_PIN, communication::is_connected());
     }
 
     void ledTest() {
@@ -36,8 +36,8 @@ namespace systemPCB {
 
     void debug_output() {
         if (!error_checker::fatal_error) {
-            printf("Position: %f, %f, %d\n", linear_movement::current_position,
-                   linear_movement::should_position, linear_movement::encoder::current_rotation, pid_settings::pid_speed.lasterror); //600 per rotation 1:4 -> 15mm
+           // printf("Position: %f, %f, %d\n", linear_movement::current_position,
+          //         linear_movement::should_position, linear_movement::encoder::current_rotation, pid_settings::pid_speed.lasterror); //600 per rotation 1:4 -> 15mm
         }
     }
 }

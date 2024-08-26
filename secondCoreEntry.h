@@ -9,7 +9,7 @@
 
 void secondCoreEntry() {
     while(true) {
-        communication::readData();
+       // communication::readData();
     }
 };
 #endif //FOOSBALLMOTORTEST_SECONDCOREENTRY_H

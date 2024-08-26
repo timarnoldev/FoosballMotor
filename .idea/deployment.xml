@@ -2,31 +2,7 @@
 <project version="4">
   <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="Tischkicker">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-            <mapping local="$USER_HOME$/development/pico/pico-sdk" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="UAV (95b0ac58-dcbf-4375-a590-2d6e624d947a)">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-            <mapping local="$USER_HOME$/development/pico/pico-sdk" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="tk@Tischkicker.local:22 password">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-            <mapping local="$USER_HOME$/development/pico/pico-sdk" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="tk@Tischkicker.local:22 password (2)">
+      <paths name="Tischkicker (f9dd2891-d221-4dbc-a212-a55a16a04cf8)">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

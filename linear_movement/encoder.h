@@ -117,12 +117,12 @@ namespace linear_movement::encoder {
     }
 
     void init_encoder() {
-        gpio_set_irq_enabled(ENCODER_PHASE_A_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true);
-        gpio_set_irq_enabled(ENCODER_PHASE_B_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true);
-
         irq_set_priority(IO_IRQ_BANK0, 256u);
 
         gpio_set_irq_callback(&encoder_irq);
+
+        gpio_set_irq_enabled(ENCODER_PHASE_A_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true);
+        gpio_set_irq_enabled(ENCODER_PHASE_B_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true);
 
         irq_set_enabled(IO_IRQ_BANK0, true);
     }

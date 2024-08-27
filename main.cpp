@@ -16,16 +16,19 @@
 #include "tusb_config.h"
 
 
+absolute_time_t last_communication = get_absolute_time();
+
+
 // Invoked when device is mounted
 void tud_mount_cb(void)
 {
-    communication::connected = true;
+    communication::mounted = true;
 }
 
 // Invoked when device is unmounted
 void tud_umount_cb(void)
 {
-    communication::connected = false;
+    communication::mounted = false;
 }
 
 void tud_suspend_cb(bool remote_wakeup_en)
@@ -89,6 +92,8 @@ void tud_hid_set_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t rep
 
     //rotation little endian
     int rotation = buffer[6] | (buffer[7] << 8);
+
+    last_communication = get_absolute_time();
 
     rotation::setPulse(rotation);
 
@@ -155,9 +160,6 @@ int main() {
 
         systemPCB::updateLEDSignals();
 
-       // linear_movement::set_should_position((float)communication::current_position);
-        //rotation::setPulse(communication::current_rotation);
-
 
         tud_task();
 
@@ -166,22 +168,13 @@ int main() {
         sleep_ms(1);
 
 
-        //FIXME here was a sleepms(1)
+
+
+        communication::connected = absolute_time_diff_us(last_communication, get_absolute_time())<1000000;
 
 
         if(absolute_time_diff_us(last_update, get_absolute_time())>4000) {
-            printf("LOOP TOOK TOO LONG\n");
-            printf("LOOP TOOK TOO LONG\n");
-            printf("LOOP TOOK TOO LONG\n");
-            printf("LOOP TOOK TOO LONG\n");
-            printf("LOOP TOOK TOO LONG\n");
-            printf("LOOP TOOK TOO LONG\n");
-            printf("LOOP TOOK TOO LONG\n");
-            printf("LOOP TOOK TOO LONG\n");
-            printf("LOOP TOOK %lld us\n", absolute_time_diff_us(last_update, get_absolute_time()));
             error_checker::fatal_error = true;
-        }else{
-            //print loop time
         }
 
         systemPCB::debug_output();

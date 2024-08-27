@@ -21,7 +21,12 @@ namespace communication {
     std::string received_rotation;
     std::string received_position;
     int current_position = 0;
+    bool mounted = false;
     bool connected = false;
+
+    bool is_mounted() {
+        return mounted;
+    }
 
     bool is_connected() {
         return connected;

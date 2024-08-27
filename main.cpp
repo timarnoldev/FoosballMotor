@@ -61,8 +61,37 @@ void tud_hid_set_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t rep
     (void) report_id;
     (void) report_type;
 
-    // echo back anything we received from host
-    tud_hid_report(0, buffer, bufsize);
+    // HEADER | STATUS BYTE | POSITION 1 | POSITION 2 | POSITION 3 | POSITION 4 | ROTATION 1 | ROTATION 2 | END
+
+    if(buffer[0] == 0x54)
+    {
+        rom_reset_usb_boot(0,0);
+        return;
+    }
+
+    if(bufsize != 9) return;
+
+    if(buffer[0] != 0x02) return;
+
+    if(buffer[8] != 0x04) return;
+
+    uint8_t status = buffer[1];
+
+    union data_holder
+    {
+        float f;
+        uint8_t b[4];
+    } data{};
+
+    memcpy(data.b, buffer+2, 4);
+
+    linear_movement::set_should_position(data.f);
+
+    //rotation little endian
+    int rotation = buffer[6] | (buffer[7] << 8);
+
+    rotation::setPulse(rotation);
+
 }
 
 void send_host_report()
@@ -126,8 +155,8 @@ int main() {
 
         systemPCB::updateLEDSignals();
 
-        linear_movement::set_should_position((float)communication::current_position);
-        rotation::setPulse(communication::current_rotation);
+       // linear_movement::set_should_position((float)communication::current_position);
+        //rotation::setPulse(communication::current_rotation);
 
 
         tud_task();

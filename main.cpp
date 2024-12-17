@@ -1,5 +1,3 @@
-#define USBD_PID 0x0001
-#define USBD_PRODUCT "Fussball"
 
 #include <cstdio>
 #include <pico/multicore.h>
@@ -166,9 +164,6 @@ int main() {
         send_host_report();
 
         sleep_ms(1);
-
-
-
 
         communication::connected = absolute_time_diff_us(last_communication, get_absolute_time())<1000000;
 

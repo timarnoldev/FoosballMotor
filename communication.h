@@ -57,8 +57,8 @@ namespace communication {
                 if (data_counter != 9) {
                     printf("Error: Overflow\n");
                 }else{
-                    current_rotation = std::stoi(received_rotation);
-                    current_position = std::stoi(received_position);
+                    //current_rotation = std::stoi(received_rotation);
+                    //current_position = std::stoi(received_position);
                     //printf("Rotation: %d\n", current_rotation);
                     //printf("Position: %d\n", current_position);
                 }

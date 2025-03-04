@@ -3,6 +3,12 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
+    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="5" type="long" />
+  </component>
   <component name="CMakePresetLoader">{
   &quot;useNewFormat&quot;: true
 }</component>
@@ -18,7 +24,7 @@
       <config projectName="foosballmotortest" targetName="cyw43_driver_picow_cyw43_bus_pio_spi_pio_h" />
       <config projectName="foosballmotortest" targetName="bs2_default_bin" />
       <config projectName="foosballmotortest" targetName="foosballmotortest" />
-      <config projectName="foosballmotortest" targetName="bs2_default_padded_checksummed_asm" />
+      <config projectName="foosballmotortest" targetName="bs2_default_library" />
       <config projectName="foosballmotortest" targetName="bs2_default" />
     </generated>
   </component>
@@ -35,12 +41,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f180659-a98c-421e-983d-22bccd63e848" name="Changes" comment="Added constants for device position">
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rotation/rotationEncoder.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rotation/rotative_movement.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/error_checker.h" beforeDir="false" afterPath="$PROJECT_DIR$/error_checker.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linear_movement/encoder.h" beforeDir="false" afterPath="$PROJECT_DIR$/linear_movement/encoder.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PID.h" beforeDir="false" afterPath="$PROJECT_DIR$/PID.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/communication.h" beforeDir="false" afterPath="$PROJECT_DIR$/communication.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linear_movement/linear_movement.h" beforeDir="false" afterPath="$PROJECT_DIR$/linear_movement/linear_movement.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pid_settings.h" beforeDir="false" afterPath="$PROJECT_DIR$/pid_settings.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/secondCoreEntry.h" beforeDir="false" afterPath="$PROJECT_DIR$/secondCoreEntry.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/system.h" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.h" afterDir="false" />
     </list>
@@ -53,6 +62,13 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="false" />
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -65,29 +81,25 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/timarnoldev/FoosballMotor.git&quot;,
-    &quot;accountId&quot;: &quot;5259040b-d5b4-4c2c-bddb-a5dd36bd3bdc&quot;
+    &quot;url&quot;: &quot;https://github.com/timarnoldev/FoosballMotor&quot;,
+    &quot;accountId&quot;: &quot;df2489dc-9ef7-4e4b-9ccf-34e488351ff4&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file:///Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/arm-none-eabi/include/stdio.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/error_checker.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/error_checker.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/linear_movement/encoder.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/main.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/main.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/main.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/secondCoreEntry.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/secondCoreEntry.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/secondCoreEntry.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/system/system.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/system/system.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/system/system.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/tusb_config.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/timarnold/Documents/Github/FoosballMotor/usb_descriptors.c" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/PID.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/communication.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/constants.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/error_checker.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/linear_movement/encoder.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/linear_movement/linear_movement.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/mainTestSpeed.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/rotation/rotation.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/rotation/rotationEncoder.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/rotation/rotative_movement.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/secondCoreEntry.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tusb_config.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/usb_descriptors.c" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/development/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/development/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="smw83nky" />
@@ -117,7 +129,9 @@
     "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "true",
     "cf.advertisement.text.has.clang-format": "true",
@@ -126,13 +140,13 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/timarnold/Documents/GitHub/FoosballMotor",
+    "last_opened_file_path": "/Users/timarnold/Documents/github/FoosballMotor",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.folding",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -180,11 +194,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="CMake Application.foosballmotortest" />
       <item itemvalue="CMake Application.bs2_default" />
       <item itemvalue="CMake Application.bs2_default_bin" />
       <item itemvalue="CMake Application.bs2_default_padded_checksummed_asm" />
       <item itemvalue="CMake Application.cyw43_driver_picow_cyw43_bus_pio_spi_pio_h" />
+      <item itemvalue="CMake Application.foosballmotortest" />
       <item itemvalue="CMake Application.pioasmBuild" />
       <item itemvalue="CMake Debug.myproject_test" />
     </list>
@@ -235,6 +249,14 @@
       <workItem from="1724596607171" duration="1020000" />
       <workItem from="1724597854947" duration="3661000" />
       <workItem from="1724613908680" duration="12583000" />
+      <workItem from="1734531150555" duration="481000" />
+      <workItem from="1734531644563" duration="102000" />
+      <workItem from="1734896451586" duration="3134000" />
+      <workItem from="1740593539021" duration="7084000" />
+      <workItem from="1740734896042" duration="21000" />
+      <workItem from="1740735218862" duration="599000" />
+      <workItem from="1740736284445" duration="12409000" />
+      <workItem from="1741000544355" duration="23242000" />
     </task>
     <task id="LOCAL-00001" summary="Added encoder tracking">
       <created>1700342579501</created>

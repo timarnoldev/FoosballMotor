@@ -2,13 +2,7 @@
 // Created by Tim Arnold on 09.12.23.
 //
 
-#include <hardware/gpio.h>
-#include <hardware/pwm.h>
-#include <valarray>
-#include "encoder.h"
-#include "../pid_settings.h"
-#include "../constants.h"
-#include "../rotation/rotation.h"
+
 
 
 #define MOTOR_ENABLE_FORWARD_PIN 5
@@ -24,6 +18,16 @@
 
 #ifndef FOOSBALLMOTORTEST_LINEAR_MOVEMENT_H
 #define FOOSBALLMOTORTEST_LINEAR_MOVEMENT_H
+
+#include <hardware/gpio.h>
+#include <hardware/pwm.h>
+#include <valarray>
+#include "encoder.h"
+#include "../pid_settings.h"
+#include "../constants.h"
+#include "../rotation/rotation.h"
+
+
 namespace linear_movement {
     void initMotor() {
         gpio_init(MOTOR_ENABLE_FORWARD_PIN);
@@ -77,6 +81,7 @@ namespace linear_movement {
 
     void calculate_state() {
         current_position = (float)encoder::current_rotation / 2400.0f * 4.0f * 15.0f;
+
         if (encoder::measured_pulse_delta_time == 0) {
             rotations_per_second = 0;
         } else {
@@ -157,7 +162,7 @@ namespace linear_movement {
 
         bool was_zero = abs(should_pwm) < 60;
 
-        should_pwm = (int) pid_settings::pid_speed.calculatePID((float) should_speed, current_speed, 0.001);
+        should_pwm = (int) pid_settings::pid_speed.calculatePID((float) should_speed, current_speed, 0.001f);
 
         is_moving = abs(should_pwm) > 60;
 

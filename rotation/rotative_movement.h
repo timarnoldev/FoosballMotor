@@ -19,13 +19,13 @@
 
 namespace rotation::movement {
 
-    double current_rotation = 0;
-    double current_rotation_speed = 0;
-    double current_rotation_speed_raw = 0;
+    float current_rotation = 0;
+    float current_rotation_speed = 0;
+    float current_rotation_speed_raw = 0;
 
 
-    double should_rotation = 0;
-    double should_rotation_speed = 0; //deg/s
+    float should_rotation = 0;
+    float should_rotation_speed = 0; //deg/s
 
     int should_pwm = 0;
 
@@ -153,26 +153,33 @@ namespace rotation::movement {
             current_rotation_speed = 0;
         }
 
-        printf("Current Rotation %f, Current PWM %d , Should Rotation %f \n", current_rotation, should_pwm, should_rotation);
+        //printf("Current Rotation  %f; Should rotation  %f; Should PWM %d\n", current_rotation, should_rotation, should_pwm);
+        printf("%f %f %f %f %d\n", current_rotation, should_rotation, current_rotation_speed, should_rotation_speed, should_pwm);
 
-        if (absolute_time_diff_us(last_change, get_absolute_time())>10000000)
+        if (absolute_time_diff_us(last_change, get_absolute_time())>3000000)
         {
 
             last_change = get_absolute_time();
-           /* if (a){
-                should_rotation = -90;
+            if (a){
+                should_rotation = 0;
+              //  should_pwm = 0;
+                pid_settings::pid_rotation_speed.reset();
             }else{
-                should_rotation = 90;
+               /// should_rotation_speed = 360;
+               should_rotation = 90;
+
+                //should_pwm = 0;
+                pid_settings::pid_rotation_speed.reset();
             }
 
             a = !a;
-            */
-            in_shoot = true;
+
+            //in_shoot = true;
         }
 
         if (in_shoot)
         {
-            rotation::movement::schuss();
+            //rotation::movement::schuss();
         }
 
     }
@@ -189,15 +196,23 @@ namespace rotation::movement {
     {
 
 
-        if (disable_control) return;
+       // if (disable_control) return;
+
 
         should_rotation_speed = pid_settings::pid_rotation.calculatePID(should_rotation, current_rotation, 0.001f);
 
-        should_pwm = static_cast<int>(should_rotation_speed / 3000.0f * 625.0f);
-       // should_pwm += (int)pid_settings::pid_rotation_speed.calculatePID(should_rotation_speed, current_rotation_speed, 0.001f);
+        //should_rotation_speed = -360; // 360 °/s
+
+       // should_pwm = static_cast<int>(should_rotation_speed / 3000.0f * 625.0f);
+        should_pwm += (int)pid_settings::pid_rotation_speed.calculatePID(should_rotation_speed, current_rotation_speed, 0.001f);
         if (should_pwm > 625)
         {
             should_pwm = 625;
+        }
+
+        if (should_pwm < -625)
+        {
+            should_pwm = -625;
         }
 
     }

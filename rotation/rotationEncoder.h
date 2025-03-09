@@ -28,7 +28,7 @@ namespace rotation::encoder {
 
     void encoder_irq(uint gpio, uint32_t events) {
 
-        if (gpio == ENCODER_PHASE_A_PIN) { //clockwise
+        if (gpio == ENCODER_PHASE_A_PIN) {
             if (gpio_get(gpio)) {
                 if (!is_phase_a_high) {
                     has_encoder_state_changed = true;
@@ -42,7 +42,7 @@ namespace rotation::encoder {
             }
         }
 
-        if (gpio == ENCODER_PHASE_B_PIN) { //counterclockwise
+        if (gpio == ENCODER_PHASE_B_PIN) {
             if (gpio_get(gpio)) {
                 if (!is_phase_b_high) {
                     has_encoder_state_changed = true;
@@ -57,6 +57,10 @@ namespace rotation::encoder {
         }
 
         if (has_encoder_state_changed) {
+
+            measured_pulse_delta_time = absolute_time_diff_us(last_pulse_time, get_absolute_time());
+            last_pulse_time = get_absolute_time();
+
             if (!is_phase_a_high && is_phase_b_high) {
                 if (last_step == 1) {
                     current_rotation--;
@@ -115,7 +119,6 @@ namespace rotation::encoder {
                 //STEP 3
                 last_step = 3;
 
-                measured_pulse_delta_time = absolute_time_diff_us(last_pulse_time, get_absolute_time());
             }
             last_encoder_response = get_absolute_time();
             has_encoder_state_changed = false;

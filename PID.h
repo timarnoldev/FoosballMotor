@@ -201,7 +201,7 @@ public:
         error=soll-ist;
 
         //proportional term
-        Pteil=((*Pgain) * error)*(function(fabsf(error/120.0f)));
+        Pteil=((*Pgain) * error)*(function(fabsf(error/5.0f)));
 
         if(lasterror!=0) { //if we have an error equal to zero we have performed a reset. We avoid calculating D because of unrealistic high values
             Dteil=((*Dgain) * ((error - lasterror)/loopIntervalTime));

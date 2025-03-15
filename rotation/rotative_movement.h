@@ -162,12 +162,13 @@ namespace rotation::movement {
             last_change = get_absolute_time();
             if (a){
                 should_rotation = 0;
+               // should_rotation_speed = 10000;
               //  should_pwm = 0;
                 pid_settings::pid_rotation_speed.reset();
             }else{
                /// should_rotation_speed = 360;
                should_rotation = 90;
-
+                //should_rotation_speed = 0;
                 //should_pwm = 0;
                 pid_settings::pid_rotation_speed.reset();
             }
@@ -201,10 +202,10 @@ namespace rotation::movement {
 
         should_rotation_speed = pid_settings::pid_rotation.calculatePID(should_rotation, current_rotation, 0.001f);
 
-        //should_rotation_speed = -360; // 360 °/s
+       // should_rotation_speed = 11000; // 360 °/s
 
        // should_pwm = static_cast<int>(should_rotation_speed / 3000.0f * 625.0f);
-        should_pwm += (int)pid_settings::pid_rotation_speed.calculatePID(should_rotation_speed, current_rotation_speed, 0.001f);
+        should_pwm += (int)pid_settings::pid_rotation_speed.calculatePID(should_rotation_speed, current_rotation_speed, 0.001f, current_rotation_speed > 0);
         if (should_pwm > 625)
         {
             should_pwm = 625;

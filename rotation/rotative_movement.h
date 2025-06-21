@@ -11,11 +11,11 @@
 #define MOTOR_ENABLE_FORWARD_PIN 5
 #define MOTOR_ENABLE_REVERSE_PIN 8
 
-#define MOTOR_PWM_FORWARD 6 //TO MOTOR
-#define MOTOR_PWM_REVERSE 7 //FROM MOTOR
+#define MOTOR_PWM_FORWARD 6 //TODO determine move direction
+#define MOTOR_PWM_REVERSE 7 //TODO determine move direction
 
-#include "rotationEncoder.h"
 #include "../pid_settings.h"
+#include "../encoder.h"
 
 namespace rotation::movement {
 
@@ -135,13 +135,13 @@ namespace rotation::movement {
 
     void calculate_state()
     {
-        current_rotation = (float)rotation::encoder::current_rotation / 2400.0f * 360.0f;
+        current_rotation = (float)encoder::rotation::current_rotation / 2400.0f * 360.0f;
 
-        if (rotation::encoder::measured_pulse_delta_time == 0) {
+        if (encoder::rotation::measured_pulse_delta_time == 0) {
             current_rotation_speed_raw = 0;
         } else {
-            current_rotation_speed_raw = 1.0f / (((double) rotation::encoder::measured_pulse_delta_time / 1.0e6) * 2400.0f) * 360.0f;
-            if(!rotation::encoder::is_clockwise)
+            current_rotation_speed_raw = 1.0f / (((double) encoder::rotation::measured_pulse_delta_time / 1.0e6) * 2400.0f) * 360.0f;
+            if(!encoder::rotation::is_clockwise)
             {
                 current_rotation_speed_raw *= -1;
             }
@@ -149,28 +149,30 @@ namespace rotation::movement {
 
         current_rotation_speed = current_rotation_speed_raw * 0.05f + current_rotation_speed * 0.95f;
 
-        if(absolute_time_diff_us(encoder::last_pulse_time, get_absolute_time())>100000) {
+        if(absolute_time_diff_us(encoder::rotation::last_pulse_time, get_absolute_time())>100000) {
             current_rotation_speed = 0;
         }
 
         //printf("Current Rotation  %f; Should rotation  %f; Should PWM %d\n", current_rotation, should_rotation, should_pwm);
-        printf("%f %f %f %f %d\n", current_rotation, should_rotation, current_rotation_speed, should_rotation_speed, should_pwm);
+        //printf("%f %f %f %f %d\n", current_rotation, should_rotation, current_rotation_speed, should_rotation_speed, should_pwm);
+
 
         if (absolute_time_diff_us(last_change, get_absolute_time())>3000000)
         {
 
             last_change = get_absolute_time();
             if (a){
-                should_rotation = 0;
-               // should_rotation_speed = 10000;
+               // should_rotation = 0;
+                should_rotation_speed = 10000;
               //  should_pwm = 0;
-                pid_settings::pid_rotation_speed.reset();
+               // pid_settings::pid_rotation_speed.reset();
             }else{
                /// should_rotation_speed = 360;
-               should_rotation = 90;
-                //should_rotation_speed = 0;
+               //should_rotation = 90;
+                should_rotation_speed = 0;
                 //should_pwm = 0;
-                pid_settings::pid_rotation_speed.reset();
+
+                ////pid_settings::pid_rotation_speed.reset();
             }
 
             a = !a;

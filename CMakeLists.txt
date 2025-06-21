@@ -10,10 +10,9 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 
 add_executable(foosballmotortest
-        main.cpp communication.h error_checker.h pid_settings.h linear_movement/linear_movement.h linear_movement/encoder.h constants.h rotation/rotation.h system/system.h secondCoreEntry.h
+        main.cpp communication.h error_checker.h pid_settings.h linear_movement/linear_movement.h constants.h system/system.h secondCoreEntry.h
         #tusb_config.h
       #  usb_descriptors.c
-        rotation/rotationEncoder.h
         rotation/rotative_movement.h)
 
 

@@ -15,15 +15,15 @@
 // 2: mid fielder
 // 3: striker
 
-#define DEVICE_POSITION 0 //also change it in CMakeLists.txt
+#define DEVICE_POSITION 0
 
 //-------SELECTION END -------
 
 
-#define SERVO_PIN 21
-#define LED_RED_PIN 13
-#define LED_YELLOW_PIN 14
-#define LED_BLUE_PIN 15
+
+#define LED_RED_PIN 22
+#define LED_YELLOW_PIN 27
+#define LED_BLUE_PIN 28
 #if DEVICE_POSITION == 0
     #define lower_bound 0
     #define upper_bound 246

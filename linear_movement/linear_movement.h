@@ -5,11 +5,12 @@
 
 
 
-#define MOTOR_ENABLE_FORWARD_PIN 5
-#define MOTOR_ENABLE_REVERSE_PIN 8
+#define MOTOR_ENABLE_FORWARD_PIN 10
+#define MOTOR_ENABLE_REVERSE_PIN 13
 
-#define MOTOR_PWM_FORWARD 6 //TO MOTOR
-#define MOTOR_PWM_REVERSE 7 //FROM MOTOR
+#define MOTOR_PWM_FORWARD 11 //TO MOTOR
+#define MOTOR_PWM_REVERSE 12 //FROM MOTOR
+#include "../rotation/rotative_movement.h"
 
 
 //CLOCKWISE MEANS MOVING TO THE MOTOR!!!
@@ -22,10 +23,9 @@
 #include <hardware/gpio.h>
 #include <hardware/pwm.h>
 #include <valarray>
-#include "encoder.h"
 #include "../pid_settings.h"
 #include "../constants.h"
-#include "../rotation/rotation.h"
+#include "../encoder.h"
 
 
 namespace linear_movement {
@@ -80,17 +80,17 @@ namespace linear_movement {
     bool is_moving = true;
 
     void calculate_state() {
-        current_position = (float)encoder::current_rotation / 2400.0f * 4.0f * 15.0f;
+        current_position = (float)encoder::linear_movement::current_rotation / 2400.0f * 4.0f * 15.0f;
 
-        if (encoder::measured_pulse_delta_time == 0) {
+        if (encoder::linear_movement::measured_pulse_delta_time == 0) {
             rotations_per_second = 0;
         } else {
-            rotations_per_second = 1.0f / (((float) encoder::measured_pulse_delta_time / 1.0e6f) * 600.0f) * 4.0f;
+            rotations_per_second = 1.0f / (((float) encoder::linear_movement::measured_pulse_delta_time / 1.0e6f) * 600.0f) * 4.0f;
         }
 
         current_speed = rotations_per_second * 0.95f + current_speed * 0.05f;
 
-        if(absolute_time_diff_us(encoder::last_pulse_time, get_absolute_time())>100000) {
+        if(absolute_time_diff_us(encoder::linear_movement::last_pulse_time, get_absolute_time())>100000) {
             current_speed = 0;
         }
 
@@ -139,7 +139,7 @@ namespace linear_movement {
     }
 
     void calculate_rotation_compensation() {
-        rotation_compensation = -((float)rotation::currentPulse-START_PULSE)/PULSE_PER_ROTATION*15;
+        rotation_compensation = -rotation::movement::current_rotation/360.0f*15;
         //rotation_compensation = 0;
     }
 
@@ -162,12 +162,12 @@ namespace linear_movement {
 
         bool was_zero = abs(should_pwm) < 60;
 
-        should_pwm = (int) pid_settings::pid_speed.calculatePID((float) should_speed, current_speed, 0.001f);
+        should_pwm += (int) pid_settings::pid_speed.calculatePID((float) should_speed, current_speed, 0.001f);
 
         is_moving = abs(should_pwm) > 60;
 
         if(is_moving && was_zero) {
-            encoder::last_encoder_response = get_absolute_time(); //reset timer to avoid emergency stop
+            encoder::linear_movement::last_encoder_response = get_absolute_time(); //reset timer to avoid emergency stop
         }
 
 

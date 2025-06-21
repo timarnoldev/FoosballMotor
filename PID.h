@@ -4,6 +4,7 @@
 
 #ifndef PICODRONE_PID_H
 #define PICODRONE_PID_H
+#include <math.h>
 
 typedef struct {
     float gain_P;

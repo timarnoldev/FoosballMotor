@@ -5,13 +5,11 @@
 #include "pico/stdlib.h"
 #include "pico/time.h"
 //#include "communication.h"
-#include "linear_movement/encoder.h"
 #include "linear_movement/linear_movement.h"
 #include "error_checker.h"
-#include "rotation/rotation.h"
 #include "system/system.h"
 #include "secondCoreEntry.h"
-#include "rotation/rotationEncoder.h"
+#include "encoder.h"
 #include "rotation/rotative_movement.h"
 //#include "tusb_config.h"
 
@@ -131,15 +129,14 @@ int main() {
 
     sleep_ms(1000);
 
-    rotation::initServo();
+    //rotation::initServo();
     systemPCB::initPCB();
     systemPCB::ledTest();
 
-    rotation::encoder::init_encoder();
+    encoder::init_encoder();
     rotation::movement::initMotor();
 
-    //linear_movement::encoder::init_encoder();
-    //linear_movement::initMotor();
+    linear_movement::initMotor();
 
     multicore_launch_core1(secondCoreEntry);
 
@@ -151,14 +148,13 @@ int main() {
         rotation::movement::calculate_motor_pwm();
         rotation::movement::apply_motor_pwm();
 
-       // linear_movement::calculate_state();
-        //linear_movement::calculate_rotation_compensation();
-       // linear_movement::bounds_safety();
-       // linear_movement::calculate_motor_pwm();
-       // linear_movement::apply_motor_pwm();
+        linear_movement::calculate_state();
+        linear_movement::calculate_rotation_compensation();
+        linear_movement::bounds_safety();
+        linear_movement::calculate_motor_pwm();
+        linear_movement::apply_motor_pwm();
 
         error_checker::check_for_fatal_errors();
-
 
 
         if (error_checker::fatal_error) {
@@ -167,6 +163,7 @@ int main() {
 
         systemPCB::updateLEDSignals();
 
+        printf("%f %f \n", linear_movement::current_position, rotation::movement::current_rotation);
 
         //tud_task();
 

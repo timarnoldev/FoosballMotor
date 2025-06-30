@@ -8,11 +8,11 @@
 #include <hardware/gpio.h>
 #include <hardware/pwm.h>
 
-#define MOTOR_ENABLE_FORWARD_PIN 5
-#define MOTOR_ENABLE_REVERSE_PIN 8
+#define MOTOR_ROTATIVE_ENABLE_FORWARD_PIN 5
+#define MOTOR_ROTATIVE_ENABLE_REVERSE_PIN 8
 
-#define MOTOR_PWM_FORWARD 6 //TODO determine move direction
-#define MOTOR_PWM_REVERSE 7 //TODO determine move direction
+#define MOTOR_ROTATIVE_PWM_FORWARD 6 //TODO determine move direction
+#define MOTOR_ROTATIVE_PWM_REVERSE 7 //TODO determine move direction
 
 #include "../pid_settings.h"
 #include "../encoder.h"
@@ -28,6 +28,8 @@ namespace rotation::movement {
     float should_rotation_speed = 0; //deg/s
 
     int should_pwm = 0;
+    bool emergency_stop = false;
+
 
     //TODO TMP:
 
@@ -41,19 +43,19 @@ namespace rotation::movement {
 
 
     void initMotor() {
-        gpio_init(MOTOR_ENABLE_FORWARD_PIN);
-        gpio_init(MOTOR_ENABLE_REVERSE_PIN);
+        gpio_init(MOTOR_ROTATIVE_ENABLE_FORWARD_PIN);
+        gpio_init(MOTOR_ROTATIVE_ENABLE_REVERSE_PIN);
 
-        gpio_set_dir(MOTOR_ENABLE_FORWARD_PIN, true);
-        gpio_set_dir(MOTOR_ENABLE_REVERSE_PIN, true);
+        gpio_set_dir(MOTOR_ROTATIVE_ENABLE_FORWARD_PIN, true);
+        gpio_set_dir(MOTOR_ROTATIVE_ENABLE_REVERSE_PIN, true);
 
-        gpio_put(MOTOR_ENABLE_FORWARD_PIN, true);
-        gpio_put(MOTOR_ENABLE_REVERSE_PIN, true);
+        gpio_put(MOTOR_ROTATIVE_ENABLE_FORWARD_PIN, true);
+        gpio_put(MOTOR_ROTATIVE_ENABLE_REVERSE_PIN, true);
 
-        gpio_set_function(MOTOR_PWM_FORWARD, GPIO_FUNC_PWM);
-        gpio_set_function(MOTOR_PWM_REVERSE, GPIO_FUNC_PWM);
+        gpio_set_function(MOTOR_ROTATIVE_PWM_FORWARD, GPIO_FUNC_PWM);
+        gpio_set_function(MOTOR_ROTATIVE_PWM_REVERSE, GPIO_FUNC_PWM);
 
-        uint slice_num = pwm_gpio_to_slice_num(MOTOR_PWM_FORWARD);
+        uint slice_num = pwm_gpio_to_slice_num(MOTOR_ROTATIVE_PWM_FORWARD);
 
         pwm_config config = pwm_get_default_config();
 
@@ -61,8 +63,8 @@ namespace rotation::movement {
         pwm_config_set_wrap(&config, 625);
         pwm_init(slice_num, &config, false);
 
-        pwm_set_gpio_level(MOTOR_PWM_FORWARD, 0); //clockwise
-        pwm_set_gpio_level(MOTOR_PWM_REVERSE, 0); //counterclockwise
+        pwm_set_gpio_level(MOTOR_ROTATIVE_PWM_FORWARD, 0); //clockwise
+        pwm_set_gpio_level(MOTOR_ROTATIVE_PWM_REVERSE, 0); //counterclockwise
 
 
         pwm_set_enabled(slice_num, true);
@@ -162,15 +164,15 @@ namespace rotation::movement {
 
             last_change = get_absolute_time();
             if (a){
-               // should_rotation = 0;
-                should_rotation_speed = 10000;
-              //  should_pwm = 0;
+                should_rotation = 0;
+              //  should_rotation_speed = 10000;
+                should_pwm = 0;
                // pid_settings::pid_rotation_speed.reset();
             }else{
                /// should_rotation_speed = 360;
-               //should_rotation = 90;
-                should_rotation_speed = 0;
-                //should_pwm = 0;
+               should_rotation = 0;
+              //  should_rotation_speed = 0;
+                should_pwm = 0;
 
                 ////pid_settings::pid_rotation_speed.reset();
             }
@@ -208,6 +210,7 @@ namespace rotation::movement {
 
        // should_pwm = static_cast<int>(should_rotation_speed / 3000.0f * 625.0f);
         should_pwm += (int)pid_settings::pid_rotation_speed.calculatePID(should_rotation_speed, current_rotation_speed, 0.001f, current_rotation_speed > 0);
+
         if (should_pwm > 625)
         {
             should_pwm = 625;
@@ -218,18 +221,30 @@ namespace rotation::movement {
             should_pwm = -625;
         }
 
+
+
     }
 
     void apply_motor_pwm()
     {
+        if(emergency_stop) return;
 
         if (should_pwm > 0) {
-            pwm_set_gpio_level(MOTOR_PWM_FORWARD, abs(should_pwm));
-            pwm_set_gpio_level(MOTOR_PWM_REVERSE, 0);
+            pwm_set_gpio_level(MOTOR_ROTATIVE_PWM_FORWARD, abs(should_pwm));
+            pwm_set_gpio_level(MOTOR_ROTATIVE_PWM_REVERSE, 0);
         } else {
-            pwm_set_gpio_level(MOTOR_PWM_REVERSE, abs(should_pwm));
-            pwm_set_gpio_level(MOTOR_PWM_FORWARD, 0);
+            pwm_set_gpio_level(MOTOR_ROTATIVE_PWM_REVERSE, abs(should_pwm));
+            pwm_set_gpio_level(MOTOR_ROTATIVE_PWM_FORWARD, 0);
         }
+    }
+
+    void emergency() {
+        emergency_stop = true;
+
+        pwm_set_gpio_level(MOTOR_ROTATIVE_PWM_FORWARD, 0);
+        pwm_set_gpio_level(MOTOR_ROTATIVE_PWM_REVERSE, 0);
+        gpio_put(MOTOR_ROTATIVE_ENABLE_FORWARD_PIN, false);
+        gpio_put(MOTOR_ROTATIVE_ENABLE_REVERSE_PIN, false);
     }
 
 

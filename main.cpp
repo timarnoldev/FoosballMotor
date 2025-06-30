@@ -163,7 +163,12 @@ int main() {
 
         systemPCB::updateLEDSignals();
 
-        printf("%f %f \n", linear_movement::current_position, rotation::movement::current_rotation);
+        if (!rotation::movement::emergency_stop)
+        {
+            printf("%f %f %d %f\n",linear_movement::current_position, linear_movement::should_speed, linear_movement::should_pwm, linear_movement::should_position);
+
+        }
+
 
         //tud_task();
 

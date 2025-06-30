@@ -46,6 +46,12 @@ namespace communication {
             reset_usb_boot(0, 0);
         }
 
+        if (data == '#')
+        {
+            linear_movement::emergency();
+            rotation::movement::emergency();
+        }
+
         if (data == '$') {
             inDataline = true;
             return;

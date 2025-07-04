@@ -64,7 +64,7 @@ namespace linear_movement {
     }
 
     float current_position = 0;
-    float rotations_per_second = 0;
+    float current_speed_raw = 0;
     float current_speed = 0; //TODO has to be 15 times higher because of Rotations/s --> mm/s
 
     float should_position = 120; // in mm
@@ -89,12 +89,19 @@ namespace linear_movement {
         current_position = (float)encoder::linear_movement::current_rotation / 2400.0f * 4.0f * 15.0f;
 
         if (encoder::linear_movement::measured_pulse_delta_time == 0) {
-            rotations_per_second = 0;
+            current_speed_raw = 0;
         } else {
-            rotations_per_second = 1.0f / (((float) encoder::linear_movement::measured_pulse_delta_time / 1.0e6f) * 600.0f) * 4.0f;
+            current_speed_raw = 1.0f / (((float) encoder::linear_movement::measured_pulse_delta_time / 1.0e6f) * 2400.0f) * 4.0f * 15.0f;
+            if (!encoder::linear_movement::is_clockwise)
+            {
+                current_speed_raw *= -1; //if not clockwise, then speed is negative
+            }
         }
 
-        current_speed = (rotations_per_second*15) * 0.95f + current_speed * 0.05f;
+        //get sign of current_speed_raw
+
+
+        current_speed = (current_speed_raw) * 0.05f + current_speed * 0.95f;
 
         if(absolute_time_diff_us(encoder::linear_movement::last_pulse_time, get_absolute_time())>100000) {
             current_speed = 0;
@@ -176,14 +183,14 @@ namespace linear_movement {
             encoder::linear_movement::last_encoder_response = get_absolute_time(); //reset timer to avoid emergency stop
         }
 
-        if (should_pwm > 120)
+        if (should_pwm > 600)
         {
-            should_pwm = 120;
+            should_pwm = 600;
         }
 
-        if (should_pwm < -120)
+        if (should_pwm < -600)
         {
-            should_pwm = -120;
+            should_pwm = -600;
         }
 
 

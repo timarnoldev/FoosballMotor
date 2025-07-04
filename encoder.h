@@ -184,7 +184,7 @@ namespace encoder
         bool is_phase_b_high = false;
         bool has_encoder_state_changed = false;
         int last_step = 0;
-        bool is_clockwise = false;
+        bool is_clockwise = false; //check if this is really true, my guess is that it is true when it is anti clockwise
         int current_rotation = 0;
         int encoder_errors = 0;
         uint measured_pulse_delta_time = 0;

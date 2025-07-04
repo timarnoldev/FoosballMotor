@@ -127,7 +127,7 @@ int main() {
     stdio_init_all();
   //  tud_init(BOARD_TUD_RHPORT);
 
-    sleep_ms(1000);
+    sleep_ms(4000);
 
     //rotation::initServo();
     systemPCB::initPCB();
@@ -165,7 +165,7 @@ int main() {
 
         if (!rotation::movement::emergency_stop)
         {
-            printf("%f %f %d %f\n",linear_movement::current_position, linear_movement::should_speed, linear_movement::should_pwm, linear_movement::should_position);
+            printf("%f %f %f %d %f\n",linear_movement::current_position, linear_movement::should_speed, linear_movement::current_speed, linear_movement::should_pwm, linear_movement::should_position);
 
         }
 

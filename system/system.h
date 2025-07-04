@@ -32,7 +32,6 @@ namespace systemPCB
         if(absolute_time_diff_us(last_time, get_absolute_time()) > 500000)
         {
             yellow_led_on = !yellow_led_on;
-            printf("test\n");
             last_time = get_absolute_time();
         }
 

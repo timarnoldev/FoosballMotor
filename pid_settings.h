@@ -9,8 +9,12 @@
 
 namespace pid_settings {
     //linear
-    ASYMETRIC_PID pid_speed = ASYMETRIC_PID(0.05f, 0, 0.00004f,0.035f,0,0.0008f, 100, 21); // mm/s -> pwm
-    PID pid_pos = PID(10.0f, 0, 0.01f, 40000, 2000); // mm -> mm/s
+    ASYMETRIC_PID pid_speed = ASYMETRIC_PID(0.06f, 0, 0.00004f,0.06f,0,0.00015f, 100, 21); // mm/s -> pwm
+    PID pid_pos = PID(12.0f, 0, 0.01f, 40000, 2000); // mm -> mm/s
+
+    //Um die Geschwindigkeit zu erhöhen, muss der P-Wert des Positions Controllers erhöht werden, gleichzeitig kann der P Wert des Geschwindigkeits Controllers
+    //erhöht werden. Darauf folgt ein Überschwingen, was durch einen höheren P-Wert des Geschwindigkeits-Brems Controllers verringert werden kann.
+    //Gleichzeitig kann auch der D-Wert des Geschwindigkeits-Brems Controllers verringert werden.
 
     //rotation
     ASYMETRIC_PID pid_rotation_speed = ASYMETRIC_PID(0.017f, 0, 0.00006f,0.017f,0,0.0002f, 100, 21); // deg/s -> delta pwm //limit 600

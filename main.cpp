@@ -141,6 +141,8 @@ int main() {
     multicore_launch_core1(secondCoreEntry);
 
     absolute_time_t last_update = get_absolute_time();
+    long long time_diff = 0;
+    int counter = 0;
 
     while (true) {
         last_update = get_absolute_time();
@@ -165,7 +167,8 @@ int main() {
 
         if (!rotation::movement::emergency_stop)
         {
-            printf("%f %f %f %d %f\n",linear_movement::current_position, linear_movement::should_speed, linear_movement::current_speed, linear_movement::should_pwm, linear_movement::should_position);
+          //  printf("%f %f %f %d %f %lld\n",linear_movement::current_position, linear_movement::should_speed, linear_movement::current_speed, linear_movement::should_pwm, linear_movement::should_position, time_diff);
+          //  printf("%f %f %f %d %f %lld\n",rotation::movement::current_rotation,rotation::movement::should_rotation_speed, rotation::movement::current_rotation_speed, rotation::movement::should_pwm, rotation::movement::should_rotation, time_diff);
 
         }
 
@@ -184,6 +187,13 @@ int main() {
         }
 
         systemPCB::debug_output();
+
+        time_diff = absolute_time_diff_us(last_update, get_absolute_time())*0.05f + time_diff * 0.95f; //low pass filter for time diff
+        counter++;
+        if (counter % 10000 == 0) {
+            printf("Time diff: %lld us, %f ms\n", time_diff, time_diff / 1000.0f);
+            counter = 0;
+        }
 
     }
 }

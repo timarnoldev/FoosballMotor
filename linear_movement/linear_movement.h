@@ -101,7 +101,7 @@ namespace linear_movement {
         //get sign of current_speed_raw
 
 
-        current_speed = (current_speed_raw) * 0.50f + current_speed * 0.50f;
+        current_speed = (current_speed_raw) * 0.30f + current_speed * 0.70f;
 
         if(absolute_time_diff_us(encoder::linear_movement::last_pulse_time, get_absolute_time())>100000) {
             current_speed = 0;
@@ -152,12 +152,12 @@ namespace linear_movement {
     }
 
     void calculate_rotation_compensation() {
-        rotation_compensation = -rotation::movement::current_rotation/360.0f*15;
+        rotation_compensation = -rotation::movement::current_rotation/360.0f*15.0f;
         //rotation_compensation = 0;
     }
 
     void calculate_motor_pwm() {
-        should_speed = pid_settings::pid_pos.calculatePID((float) loop_should_position, current_position, 0.001);
+        should_speed = pid_settings::pid_pos.calculatePID((float) loop_should_position, current_position, 0.001f);
 
         //set bounds for should_speed in safety zone
         if(is_in_safe_zone_bottom) {

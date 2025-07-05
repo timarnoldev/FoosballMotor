@@ -149,7 +149,7 @@ namespace rotation::movement {
             }
         }
 
-        current_rotation_speed = current_rotation_speed_raw * 0.05f + current_rotation_speed * 0.95f;
+        current_rotation_speed = current_rotation_speed_raw * 0.30f + current_rotation_speed * 0.70f;
 
         if(absolute_time_diff_us(encoder::rotation::last_pulse_time, get_absolute_time())>100000) {
             current_rotation_speed = 0;
@@ -164,13 +164,13 @@ namespace rotation::movement {
 
             last_change = get_absolute_time();
             if (a){
-                should_rotation = 0;
+                should_rotation = 90;
               //  should_rotation_speed = 10000;
                 should_pwm = 0;
                // pid_settings::pid_rotation_speed.reset();
             }else{
                /// should_rotation_speed = 360;
-               should_rotation = 0;
+               should_rotation = -45;
               //  should_rotation_speed = 0;
                 should_pwm = 0;
 

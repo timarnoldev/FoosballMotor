@@ -1,22 +1,22 @@
 
 #include <cstdio>
 #include <pico/multicore.h>
-#include "tusb.h"
+//#include "tusb.h"
 #include "pico/stdlib.h"
 #include "pico/time.h"
-#include "communication.h"
-#include "linear_movement/encoder.h"
+//#include "communication.h"
 #include "linear_movement/linear_movement.h"
 #include "error_checker.h"
-#include "rotation/rotation.h"
 #include "system/system.h"
 #include "secondCoreEntry.h"
-#include "tusb_config.h"
+#include "encoder.h"
+#include "rotation/rotative_movement.h"
+//#include "tusb_config.h"
 
 
 absolute_time_t last_communication = get_absolute_time();
 
-
+/*
 // Invoked when device is mounted
 void tud_mount_cb(void)
 {
@@ -121,19 +121,21 @@ void send_host_report()
 
 }
 
-
+*/
 
 int main() {
-    //stdio_init_all();
-    tud_init(BOARD_TUD_RHPORT);
+    stdio_init_all();
+  //  tud_init(BOARD_TUD_RHPORT);
 
-    sleep_ms(1000);
+    sleep_ms(4000);
 
-    rotation::initServo();
+    //rotation::initServo();
     systemPCB::initPCB();
     systemPCB::ledTest();
 
-    linear_movement::encoder::init_encoder();
+    encoder::init_encoder();
+    rotation::movement::initMotor();
+
     linear_movement::initMotor();
 
     multicore_launch_core1(secondCoreEntry);
@@ -142,6 +144,10 @@ int main() {
 
     while (true) {
         last_update = get_absolute_time();
+        rotation::movement::calculate_state();
+        rotation::movement::calculate_motor_pwm();
+        rotation::movement::apply_motor_pwm();
+
         linear_movement::calculate_state();
         linear_movement::calculate_rotation_compensation();
         linear_movement::bounds_safety();
@@ -151,21 +157,26 @@ int main() {
         error_checker::check_for_fatal_errors();
 
 
-
         if (error_checker::fatal_error) {
-            linear_movement::emergency();
+          //  linear_movement::emergency();
         }
 
         systemPCB::updateLEDSignals();
 
+        if (!rotation::movement::emergency_stop)
+        {
+            printf("%f %f %f %d %f\n",linear_movement::current_position, linear_movement::should_speed, linear_movement::current_speed, linear_movement::should_pwm, linear_movement::should_position);
 
-        tud_task();
+        }
 
-        send_host_report();
+
+        //tud_task();
+
+      //  send_host_report();
 
         sleep_ms(1);
 
-        communication::connected = absolute_time_diff_us(last_communication, get_absolute_time())<1000000;
+        //communication::connected = absolute_time_diff_us(last_communication, get_absolute_time())<1000000;
 
 
         if(absolute_time_diff_us(last_update, get_absolute_time())>4000) {

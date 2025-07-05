@@ -23,7 +23,7 @@ namespace error_checker {
             out_of_bounds = true;
         }
 
-        if(linear_movement::encoder::encoder_errors > 1) {
+        if(encoder::linear_movement::encoder_errors > 1) {
            // printf("------------------\n");
           //  printf("ENCODER GAVE STRANGE OUTPUT\n");
            // printf("------------------\n");
@@ -31,7 +31,7 @@ namespace error_checker {
             encoder_error = true;
         }
 
-        if(linear_movement::is_moving && absolute_time_diff_us(linear_movement::encoder::last_encoder_response, get_absolute_time()) > 50000) {
+        if(linear_movement::is_moving && absolute_time_diff_us(encoder::linear_movement::last_encoder_response, get_absolute_time()) > 50000) {
             //printf("------------------\n");
            // printf("ENCODER DIDNT RESPOND IN TIME\n");
           //  printf("------------------\n");

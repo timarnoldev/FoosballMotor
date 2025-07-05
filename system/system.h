@@ -7,7 +7,7 @@
 
 #include <hardware/gpio.h>
 
-#include "communication.h"
+//#include "communication.h"
 #include "../constants.h"
 
 namespace systemPCB
@@ -37,7 +37,7 @@ namespace systemPCB
 
         gpio_put(LED_BLUE_PIN, linear_movement::is_in_safe_zone_top || linear_movement::is_in_safe_zone_bottom);
 
-        if (communication::is_connected())
+     /*   if (communication::is_connected())
         {
             gpio_put(LED_YELLOW_PIN, true);
         }
@@ -52,6 +52,7 @@ namespace systemPCB
                 gpio_put(LED_YELLOW_PIN, false);
             }
         }
+        */
     }
 
     void ledTest()

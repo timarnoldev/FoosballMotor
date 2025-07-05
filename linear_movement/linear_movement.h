@@ -101,7 +101,7 @@ namespace linear_movement {
         //get sign of current_speed_raw
 
 
-        current_speed = (current_speed_raw) * 0.05f + current_speed * 0.95f;
+        current_speed = (current_speed_raw) * 0.50f + current_speed * 0.50f;
 
         if(absolute_time_diff_us(encoder::linear_movement::last_pulse_time, get_absolute_time())>100000) {
             current_speed = 0;

@@ -129,7 +129,6 @@ int main() {
 
     sleep_ms(4000);
 
-    //rotation::initServo();
     systemPCB::initPCB();
     systemPCB::ledTest();
 
@@ -141,8 +140,10 @@ int main() {
     multicore_launch_core1(secondCoreEntry);
 
     absolute_time_t last_update = get_absolute_time();
+    absolute_time_t last_jump = get_absolute_time();
     long long time_diff = 0;
     int counter = 0;
+    bool posA = false;
 
     while (true) {
         last_update = get_absolute_time();
@@ -181,6 +182,17 @@ int main() {
 
         //communication::connected = absolute_time_diff_us(last_communication, get_absolute_time())<1000000;
 
+        if (absolute_time_diff_us(last_jump, get_absolute_time()) > 3000000) {
+            last_jump = get_absolute_time();
+            if (posA)
+            {
+                linear_movement::set_should_position(2);
+                posA = false;
+            }else{
+                linear_movement::set_should_position(120);
+                posA = true;
+            }
+        }
 
         if(absolute_time_diff_us(last_update, get_absolute_time())>4000) {
             error_checker::fatal_error = true;
